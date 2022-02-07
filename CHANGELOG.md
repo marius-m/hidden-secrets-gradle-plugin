@@ -2,6 +2,11 @@
 ### Improvements
 * Ability to re-generate secrets from .properties file
 * Group Gradle tasks and their descriptions to convenience command `tasks`
+# v0.1.3
+### Fixes
+* Fix build on Mac with M1 chip
+### Improvements
+* Update Gradle, Detekt, and Kotest
 # v0.1.2
 ### Fixes
 * Fix call to `customDecode()` in C++ code

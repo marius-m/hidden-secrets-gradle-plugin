@@ -20,7 +20,7 @@ This gradle plugin can be used with any Android project in Java or Kotlin.
 
 # 1 - Install the plugin
 ## Using the plugins DSL
-In your app level `build.gradle`:
+In your Module level `build.gradle`:
 
 ```gradle
 plugins {
@@ -29,11 +29,12 @@ plugins {
 ```
 ℹ️ If your project sync triggers the issue `Could not find com.android.tools.build:gradle:X.Y.Z`, please use the legacy plugin application below.
 ## Using legacy plugin application
-Add these lines in your app level `build.gradle`:
+Add these lines at the beginning of your Module level `build.gradle`:
 
 ```gradle
 buildscript {
     repositories {
+        google()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -128,7 +129,7 @@ If you are using CI system to provide secrets, that are not hard-coded into the 
 This is useful if you want to split production keys from repository itself, thus increasing security in your project repository. 
 
 ### Setting up
-1. Create a new properties file in root project directory (or CI creates one). 
+1. Create a new properties file in root project directory. 
 
 ``` shell
 credentials.properties
@@ -137,14 +138,14 @@ credentials.properties
 2. Fill in wanted secrets. For ex.: 
 
 ``` java-properties
-secret1=property123
-secret2=property321
+keyName1=yourKeyToObfuscate1
+keyName2=yourKeyToObfuscate2
 ```
 
 3. Run
 
 ``` shell
-./gradlew hideSecretFromProperties -PfromProps=creds.properties
+./gradlew hideSecretFromPropertiesFile -PpropertiesFileName=credentials.properties
 ```
 
 It will regenerate all secret files in the project and update all secrets from the properties file.
